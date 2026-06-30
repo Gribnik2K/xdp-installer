@@ -389,19 +389,17 @@ else
     case "$XDP_MODE" in
         native)
             printf "  ${G}${BO}✔ XDP заработает в NATIVE mode + zero-copy${N}\n"
-            printf "  Флаги: --experimental-retransmit-xdp-interface %s \\\\\n" "$DEFIFACE"
-            printf "         --experimental-retransmit-xdp-cpu-cores <N> \\\\\n"
-            printf "         --experimental-retransmit-xdp-zero-copy \\\\\n"
-            printf "         --experimental-poh-pinned-cpu-core <M>\n"
+            printf "  Флаги: --xdp-interface %s \\\\\n" "$DEFIFACE"
+            printf "         --xdp-cpu-cores <N> \\\\\n"
+            printf "         --xdp-zero-copy \\\\\n"
             VERDICT_MODE="native + zero-copy"
             ;;
         native-no-zc)
             printf "  ${G}${BO}✔ XDP заработает в NATIVE mode (БЕЗ zero-copy)${N}\n"
             printf "  Broadcom bnxt_en: zero-copy ЗАПРЕЩЁН (Anza guide).\n"
             [ "$RING_POW2" = "no" ] && printf "  ${Y}Нужен ExecStartPre: ethtool -G %s rx 1024 tx 1024${N}\n" "$DEFIFACE"
-            printf "  Флаги: --experimental-retransmit-xdp-interface %s \\\\\n" "$DEFIFACE"
-            printf "         --experimental-retransmit-xdp-cpu-cores <N> \\\\\n"
-            printf "         --experimental-poh-pinned-cpu-core <M>\n"
+            printf "  Флаги: --xdp-interface %s \\\\\n" "$DEFIFACE"
+            printf "         --xdp-cpu-cores <N> \\\\\n"
             VERDICT_MODE="native (no zero-copy)"
             ;;
         generic)
